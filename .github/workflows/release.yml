@@ -37,6 +37,12 @@ jobs:
       - name: build libs
         run: pnpm run build
 
+      - name: publish to npm
+        run: pnpm -r publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_CONFIG_PROVENANCE: true
+
       - name: build vscode template
         run: pnpm run vscode:build-tpl
 
